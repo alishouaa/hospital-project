@@ -1,0 +1,261 @@
+* {
+    font-family: self;
+}
+body {
+    background-color: #ede4ec;
+}
+.navbar {
+    background-color: #02333c;
+    padding: 15px 0;
+    margin: 0;
+}
+input[type='search'] {
+    font-size: 13px;
+    padding: 5px 30px;
+}
+.navbar li, 
+.navbar a {
+    display: inline;
+    color: white;
+    padding: 0 30px;
+}
+span.note {
+    color: green;
+    font-weight: bold;
+    font-size: 20px;
+}
+table th , td {
+    font-size: 18px;
+    text-align: center;
+}
+.btn-user , 
+.btn-user:hover  ,
+.btn-user:focus,
+.btn-user:active {
+    background-color: transparent;
+    color: black;
+    border: none;
+    margin: 0;
+    font-weight: bold;
+  
+}
+a {
+    text-decoration: none;
+}
+
+.row {
+    margin: 0;
+}
+
+.info {
+    padding: 20px 30px;
+    text-align: center;
+}
+.info li {
+    list-style: none;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px 0;
+}
+.info span {
+    color: blue;
+}
+label {
+    font-weight: bold;
+}
+td {
+    font-weight: bold;
+}
+th {
+    color: green;
+}
+.home {
+    background-color: #08535d;
+    height: 600px;
+}
+.text {
+    color: white;
+    padding: 150px 50px;
+}
+.text h2 {
+    padding-top: 30px;
+    padding-right: 150px;
+    color: rgb(201, 196, 196);
+}
+
+.user ul li {
+    list-style: none;
+    color: white;
+    padding: 15px 0;
+    font-size: 20px;
+}
+
+.user span {
+    border: 2px solid white;
+    font-size: 35px;
+    border-radius: 60px;
+    padding: 15px 20px;
+    margin-right: 100px;
+}
+.user {
+    border-right: 1px solid white;
+        margin-top: 60px;
+        padding-top: 20px;
+        padding-right: 50px;
+
+}
+.footer {
+    background-color: #02333c;
+    padding: 5.5px 0;
+}
+.footer p {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+}
+.nav-home {
+    background-color: #02333c;
+    padding: 20px 0;
+}
+.nav-home li {
+    color: white;
+    list-style: none;
+    display: inline;
+    padding: 0 90px;
+    font-size: 20px;
+}
+.nav-home li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+}
+.nav-home a:hover {
+    color: #02333c;
+    background-color: #ede4ec;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+}
+.login {
+    padding: 80px 30px;
+    border: 1px solid grey;
+    margin-top: -10px;
+    background-color: #02333c;
+    color: white;
+    box-shadow: 10px 10px 5px grey;
+
+}
+.login input {
+    margin: 20px 0;
+}
+.login span {
+    font-size: 45px;
+    border: 2px solid grey;
+    border-radius: 50%;
+    padding: 15px 20px;
+    color: white;
+}
+.login-user {
+    text-align: center;
+    padding-bottom: 50px;
+}
+.error {
+    color: brown;
+    padding: 20px 0;
+    float: left;
+    font-weight: bold;
+}
+@media (max-width:550px) {
+    
+    .nav-home li {
+        padding: 12px 0;
+        text-align: center;
+        display: block;
+    }
+    
+    .user span {
+        margin-right: 120px;
+        padding: 0;
+    }
+    .user {
+        padding: 0;
+        border: none;
+    }
+    .text {
+        padding: 40px 20px 0 ;
+    }
+    .text h1 {
+        font-size: 23px;
+    }
+    .text h2 {
+        padding: 30px;
+        padding-right: 70px;
+        padding-bottom: 0;
+    }
+    .home {
+        height: 800px;
+    }
+    .table-test {
+        overflow: scroll;
+    }
+    .navbar-search  {
+        text-align: center;
+        padding: 10px 30px;
+    }
+    .navbar-search li {
+        padding: 10px 0;
+        display: block;
+    }
+    
+    
+}
+@media (max-width :768px) {
+    .nav-home li {
+        padding: 12px 0;
+    }
+    .text {
+        padding: 40px 20px 0 ;
+        text-align: center;
+    }
+    .text h1 {
+        font-size: 23px;
+    }
+    .text h2 {
+        padding: 30px;
+        padding-right: 70px;
+        padding-bottom: 0;
+    }
+    .home {
+        height: 650px;
+    }
+    .user {
+        padding: 0;
+        border: none;
+        text-align: center;
+    }
+    .user span {
+        margin-right: 30px;
+    }
+    .table-test {
+        overflow: scroll;
+    }
+}
+@media (max-width :1024px) {
+    .nav-home li {
+        padding: 12px 20px;
+    }
+    .text {
+        padding: 150px 20px 0 ;
+    }
+  
+    .home {
+        height: 520px;
+    }
+    .user {
+        padding: 0;
+        border: none;
+        text-align: center;
+    }
+    .table-test {
+        overflow: scroll;
+    }
+}
