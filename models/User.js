@@ -11,14 +11,6 @@ const UserSchema = new Schema(
             type: String,
             required: true,
         },
-        father: {
-            type: String,
-            required: true,
-        },
-        mother : {
-            type:String ,
-            required: true
-        }, 
         company: {
             type: String,
             required: true,

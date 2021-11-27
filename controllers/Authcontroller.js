@@ -85,13 +85,11 @@ const login = (req, res, next) => {
 }
 
 const addUser = async (req, res, next) => {
-  const { name, father, mother, company, street, guarantor, phone } = req.body;
+  const { name, company, street, guarantor, phone } = req.body;
   const avatar = req.file.path;
   
     const ItemData = new User({
       name: name,
-      father: father,
-      mother: mother,
       avatar: avatar.split('\\')[1],
       company: company,
       street: street,
@@ -123,8 +121,6 @@ const updateUser = async (req, res, next) => {
       console.log('error')
     }
     userUpdate.name = name;
-    userUpdate.father = father;
-    userUpdate.mother = mother;
     userUpdate.company = company;
     userUpdate.street = street;
     userUpdate.phone = phone;
@@ -150,13 +146,14 @@ const getOne = async (req, res, next) => {
 
 const postHelp = async (req, res, next) => {
   const userId = req.params.userId
-  const { type, priceTotal, priceHelp } = req.body;
+  const { type, priceTotal, priceHelp , identifier } = req.body;
 
   let data = new Help({
     userId: userId,
     type: type,
     priceTotal: priceTotal,
-    priceHelp: priceHelp
+    priceHelp: priceHelp,
+    identifier : identifier
   })
   const result = await data.save();
   res.status(201).json({ message: "add new help", itemId: result._id })
@@ -177,6 +174,19 @@ const getHelp = async (req, res, next) => {
 
 }
 
+const deleteHelp = async (req, res, next) => {
+
+  const helpId = req.params.helpId;
+  const help = await Help.findOne({ _id: helpId });
+  if (!help) {
+    const error = new Error('Could not find Post.');
+    error.statusCode = 404;
+    throw error;
+  }
+  await Help.deleteOne({ _id: helpId })
+  res.status(200).json({ message: 'delete fetched.', help });
+}
+
 module.exports = {
-  addUser, getUser, updateUser, postHelp, getHelp, getOne, register,login
+  addUser, getUser, updateUser, postHelp, getHelp, getOne, register,login , deleteHelp
 }

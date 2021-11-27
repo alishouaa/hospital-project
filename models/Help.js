@@ -11,6 +11,10 @@ const HelpSchema = new Schema(
             type: String,
             required: true,
         },
+        identifier: {
+            type: String,
+            required: true,
+        },
         priceTotal: {
             type: Number,
             required: true,

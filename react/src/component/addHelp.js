@@ -9,6 +9,7 @@ class AddUser extends Component {
         pricetotal: '',
         pricehelp: '',
         type: '',
+        identifier : '',
         payment: '0',
         status: ''
     }
@@ -16,6 +17,7 @@ class AddUser extends Component {
     ChangePriceTotal = (e) => { this.setState({ pricetotal: e.target.value }) }
     ChangePriceHelp = (e) => { this.setState({ pricehelp: e.target.value }) }
     ChangeType = (e) => { this.setState({ type: e.target.value }) }
+    ChangeIdentifier = (e) => { this.setState({ identifier: e.target.value }) }
 
 
     onAddUser = async (e) => {
@@ -27,7 +29,8 @@ class AddUser extends Component {
         const data = {
             "type": this.state.type,
             "priceTotal": this.state.pricetotal,
-            "priceHelp": this.state.pricehelp
+            "priceHelp": this.state.pricehelp,
+            "identifier" : this.state.identifier
         }
 
         fetch(`http://localhost:8080/api/post-help/${this.props.location.state}`, {
@@ -87,6 +90,10 @@ class AddUser extends Component {
                                     <option value="ولادة">ولادة</option>
 
                                 </select>
+                            </div>
+                            <div className="mb-3">
+                                <label className="form-label">المعرّف عنه</label>
+                                <input type="text" required value={this.state.identifier} className="form-control" onChange={this.ChangeIdentifier} />
                             </div>
                             <div className="mb-3">
                                 <label className="form-label">المبلغ الكامل</label>

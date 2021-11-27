@@ -6,8 +6,6 @@ import { Link } from 'react-router-dom';
 class AddUser extends Component {
     state = {
         name: '',
-        father: '',
-        mother: '',
         avatar: null,
         company: '',
         street: '',
@@ -28,8 +26,6 @@ class AddUser extends Component {
     //           })
     //       }
     changeName = (e) => { this.setState({ name: e.target.value }) }
-    changeFather = (e) => { this.setState({ father: e.target.value }) }
-    changeMother = (e) => { this.setState({ mother: e.target.value }) }
     changePhone = (e) => { this.setState({ phone: e.target.value }) }
     changeAvatar = (e) => { this.setState({ avatar: e.target.files[0] }) }
     changeCompany = (e) => { this.setState({ company: e.target.value }) }
@@ -45,8 +41,6 @@ class AddUser extends Component {
 
         const formData = new FormData();
         formData.append('name', this.state.name);
-        formData.append('father', this.state.father)
-        formData.append('mother', this.state.mother)
         formData.append('company', this.state.company)
         formData.append('street', this.state.street);
         formData.append('phone', this.state.phone);
@@ -67,16 +61,7 @@ class AddUser extends Component {
             this.setState({
                 status: 'تم إضافة المستخدم بنجاح'
             })
-        }, 1800);
-
-        // .then(res => {
-        //     e.target.name.value = '';
-        //     e.target.father.value = '';
-        //     e.target.mother.value = '';
-        //     e.target.company.value = '';
-        //     e.target.street.value = '';
-        //     e.target.guarantor.value = '';
-        // })
+        }, 1500);
     }
 
 
@@ -99,33 +84,11 @@ class AddUser extends Component {
                 <form className="container py-3" onSubmit={this.onAddUser} >
                     <div className="row pt-3">
                         <div className="col-md-6">
-                            <div className="mb-3">
+                            <div className="mb-5">
                                 <label className="form-label">الاسم الكامل</label>
                                 <input type="text" required value={this.state.name} className="form-control" onChange={this.changeName} />
                             </div>
-                            <div className="mb-3">
-                                <label className="form-label">اسم الأب</label>
-                                <input type="text" required value={this.state.father} className="form-control" onChange={this.changeFather} />
-                            </div>
-                            <div className="mb-3">
-                                <label className="form-label">اسم الأم</label>
-                                <input type="text" required value={this.state.mother} className="form-control" onChange={this.changeMother} />
-                            </div>
-                            <div className="mb-3">
-                                <label className="form-label">صورة عن الهوية</label>
-                                <input class="form-control mt-2" id="inputGroupFile02" type="file" required onChange={this.changeAvatar} name="myImage" accept="image/*" />
-                            </div>
-                        </div>
-                        <div className="col-md-6">
-                            <div className="mb-3">
-                                <label className="form-label">المنطقة </label>
-                                <input type="text" required value={this.state.company} className="form-control" onChange={this.changeCompany} />
-                            </div>
-                            <div className="mb-3">
-                                <label className="form-label">الشارع</label>
-                                <input type="text" required value={this.state.street} className="form-control" onChange={this.changeStreet} />
-                            </div>
-                            <div className="mb-3">
+                            <div className="mb-5">
                                 <label className="form-label">الجهة الضامنة</label>
                                 <select class="form-select" value={this.state.guarantor} onChange={this.changeGuarantor}>
                                     <option value="لم يحدد" selected>اختر الجهة</option>
@@ -135,7 +98,22 @@ class AddUser extends Component {
                                     <option value="تأمين">تأمين</option>
                                 </select>
                             </div>
-                            <div className="mb-3">
+                            <div className="mb-5">
+                                <label className="form-label">صورة عن الهوية</label>
+                                <input class="form-control mt-2" id="inputGroupFile02" type="file" required onChange={this.changeAvatar} name="myImage" accept="image/*" />
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="mb-5">
+                                <label className="form-label">المنطقة </label>
+                                <input type="text" required value={this.state.company} className="form-control" onChange={this.changeCompany} />
+                            </div>
+                            <div className="mb-5">
+                                <label className="form-label">الشارع</label>
+                                <input type="text" required value={this.state.street} className="form-control" onChange={this.changeStreet} />
+                            </div>
+                            
+                            <div className="mb-5">
                                 <label className="form-label">رقم الهاتف</label>
                                 <input type="Number" required value={this.state.phone} className="form-control" onChange={this.changePhone} />
                             </div>

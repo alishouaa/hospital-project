@@ -35,18 +35,18 @@ class GetUser extends Component {
     }
     getUsers = () => {
         fetch('http://localhost:8080/api/get-user', {
-          method: 'GET'
+            method: 'GET'
         })
-          .then(res => res.json())
-          .then(data => {
-            this.setState({
-              users: data.result,
-            });
-          })
-      }
-      componentDidMount() {
+            .then(res => res.json())
+            .then(data => {
+                this.setState({
+                    users: data.result,
+                });
+            })
+    }
+    componentDidMount() {
         this.getUsers();
-      }
+    }
 
     render() {
         let name = this.state.name;
@@ -59,7 +59,7 @@ class GetUser extends Component {
                     <Modal.Body id="modal" >
                         <Link
                             to={{ pathname: "/get-one", state: name }}
-                            style={{ color: "brown", textDecoration: "none",fontWeight:"bold" }}>
+                            style={{ color: "brown", textDecoration: "none", fontWeight: "bold" }}>
                             الذهاب لصفحة المستخدم
                             <FontAwesomeIcon className="mx-3" icon={faArrowLeft}>
                             </FontAwesomeIcon>
@@ -79,49 +79,45 @@ class GetUser extends Component {
 
                 </ul>
                 <div className="table-test">
-                <table className="table table-bordered ">
-                    <thead>
-                        <tr>
-                            <th scope="col">الإسم الكامل</th>
-                            <th scope="col">اسم لأب</th>
-                            <th scope="col">اسم الأم</th>
-                            <th scope="col">رقم الهاتف</th>
-                            <th scope="col">المنطقة </th>
-                            <th scope="col">الشارع </th>
-                            <th scope="col">الجهة الضامنة </th>
-                            <th scope="col">رقم المستخدم </th>
+                    <table className="table table-bordered ">
+                        <thead>
+                            <tr>
+                                <th scope="col">الإسم الكامل</th>
+                                <th scope="col">المنطقة </th>
+                                <th scope="col">الشارع </th>
+                                <th scope="col">الجهة الضامنة </th>
+                                <th scope="col">رقم الهاتف</th>
+                                <th scope="col">رقم المستخدم </th>
 
-                        </tr>
-                    </thead>
-                    {this.state.users.filter((item) => {
-                        if (this.state.search === "") {
-                            return item
-                        } else if (item.name.toLowerCase().includes(this.state.search.toLowerCase())) {
-                            return item
-                        }
-                    }).map((user,index) => {
-                        return (
-                            <tbody key={index}>
-                                <tr>
-                                    <td onClick={this.changeName} value={user.name} className="list-group-item list-group-item-action" scope="row">
-                                        <Button className="btn-user" onClick={this.handleShow}>
-                                            {user.name}
-                                        </Button>
-                                    </td>
-                                    <td>{user.father}</td>
-                                    <td>{user.mother}</td>
-                                    <td>{user.phone}</td>
-                                    <td>{user.company}</td>
-                                    <td>{user.street}</td>
-                                    <td>{user.guarantor}</td>
-                                    <td>{user._id}</td>
+                            </tr>
+                        </thead>
+                        {this.state.users.filter((item) => {
+                            if (this.state.search === "") {
+                                return item
+                            } else if (item.name.toLowerCase().includes(this.state.search.toLowerCase())) {
+                                return item
+                            }
+                        }).map((user, index) => {
+                            return (
+                                <tbody key={index}>
+                                    <tr>
+                                        <td onClick={this.changeName} value={user.name} className="text-center list-group-item list-group-item-action" scope="row">
+                                            <Button className="btn-user" onClick={this.handleShow}>
+                                                {user.name}
+                                            </Button>
+                                        </td>
+                                        <td>{user.company}</td>
+                                        <td>{user.street}</td>
+                                        <td>{user.guarantor}</td>
+                                        <td>{user.phone}</td>
+                                        <td>{user._id}</td>
 
-                                </tr>
-                            </tbody>
-                        )
-                    })}
+                                    </tr>
+                                </tbody>
+                            )
+                        })}
 
-                </table>
+                    </table>
                 </div>
             </div >
         )

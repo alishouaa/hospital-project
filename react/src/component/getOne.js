@@ -11,18 +11,14 @@ const GetOne = (props) => {
         setIsEdit(!isEdit)
     }
     var inputName = useRef(null)
-    var inputFather = useRef(null)
-    var inputMother = useRef(null)
     var inputCompany = useRef(null)
     var inputPhone = useRef(null)
     var inputStreet = useRef(null)
     var inputGuarantor = useRef(null)
 
-    const update = (value1, value2, value3, value4, value5, value6, value7, userId) => {
+    const update = (value1, value4, value5, value6, value7, userId) => {
         const data = {
             "name": value1,
-            "father": value2,
-            "mother": value3,
             "company": value4,
             "street": value5,
             "phone": value6,
@@ -43,8 +39,6 @@ const GetOne = (props) => {
         let users = props.user
         let select = users.find((user) => user._id === userId);
         select['name'] = value1;
-        select['father'] = value2;
-        select['mother'] = value3;
         select['company'] = value4;
         select['street'] = value5;
         select['phone'] = value6;
@@ -57,8 +51,7 @@ const GetOne = (props) => {
     const onChangeInput = (userId, event) => {
         event.preventDefault();
         console.log(user)
-        update(inputName.current.value, inputFather.current.value,
-            inputMother.current.value, inputCompany.current.value,
+        update(inputName.current.value, inputCompany.current.value,
             inputStreet.current.value, inputPhone.current.value, inputGuarantor.current.value, userId);
         toggleState();
     }
@@ -85,8 +78,6 @@ const GetOne = (props) => {
                                     <div className="col-md-6">
                                         <ul className="info">
                                             <li>الإسم الكامل : <span>{user.name}</span></li>
-                                            <li>اسم الأب : <span>{user.father}</span></li>
-                                            <li>اسم الأم : <span>{user.mother}</span></li>
                                             <li>السكن : <span>{user.company}</span></li>
                                             <li>الشارع : <span>{user.street}</span></li>
                                             <li>الجهة :<span> {user.guarantor}</span></li>
@@ -121,6 +112,7 @@ const GetOne = (props) => {
                                                     <th scope="col">نوع المساعدة</th>
                                                     <th scope="col">القيمة المطلوبة</th>
                                                     <th scope="col">قيمة السماعدة</th>
+                                                    <th scope="col"> المعرّف عنه</th>
                                                     <th scope="col">تاريخ المساعدة </th>
 
 
@@ -137,6 +129,7 @@ const GetOne = (props) => {
                                                             <td>{help.type}</td>
                                                             <td>{help.priceTotal}</td>
                                                             <td>{help.priceHelp}</td>
+                                                            <td>{help.identifier}</td>
                                                             <td>{help.createdAt}</td>
 
                                                         </tr>
@@ -157,8 +150,6 @@ const GetOne = (props) => {
                                     <div className="col-md-6">
                                         <form onSubmit={(event) => onChangeInput(user._id, event)}>
                                             <input ref={inputName} defaultValue={user.name} type="text" className="form-control my-2" required />
-                                            <input ref={inputFather} defaultValue={user.father} type="text" className="form-control  my-2" required />
-                                            <input ref={inputMother} defaultValue={user.mother} type="text" className="form-control  my-2" required />
                                             <input ref={inputCompany} defaultValue={user.company} type="text" className="form-control  my-2" required />
                                             <input ref={inputStreet} defaultValue={user.street} type="text" className="form-control  my-2" required />
                                             <input ref={inputGuarantor} defaultValue={user.guarantor} type="text" className="form-control  my-2" required />

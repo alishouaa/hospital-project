@@ -21,6 +21,20 @@ class GetHelp extends Component {
         this.getHelps();
     }
 
+    deleteHelp = async (index , id) => {
+        fetch(`http://localhost:8080/api/delete-help/${id}`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+        let helps = this.state.helps;
+        helps.splice (index, 1);
+        this.setState({
+            helps: helps
+        })
+    }
     render() {
         return (
             <div >
@@ -42,6 +56,7 @@ class GetHelp extends Component {
                                 <th scope="col">نوع المساعدة</th>
                                 <th scope="col">القيمة المطلوبة</th>
                                 <th scope="col">قيمة السماعدة</th>
+                                <th scope="col">المعرّف عنه</th>
                                 <th scope="col">تاريخ المساعدة </th>
                                 <th scope="col">رقم المستخدم </th>
 
@@ -49,7 +64,7 @@ class GetHelp extends Component {
 
                             </tr>
                         </thead>
-                        {this.state.helps.map((help,index) => {
+                        {this.state.helps.map((help, index) => {
                             return (
                                 <tbody key={index}>
                                     <tr>
@@ -57,9 +72,11 @@ class GetHelp extends Component {
                                         <td>{help.type}</td>
                                         <td>{help.priceTotal}</td>
                                         <td>{help.priceHelp}</td>
+                                        <td>{help.identifier}</td>
                                         <td>{help.createdAt}</td>
                                         <td>{help?.userId?._id}</td>
-
+                                        <td onClick={() => this.deleteHelp(index ,help._id)} style={{ backgroundColor: "brown" }} className="btn btn-danger my-1">حذف
+                                        </td>
                                     </tr>
                                 </tbody>
                             )
