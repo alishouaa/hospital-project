@@ -8,10 +8,11 @@ router.post('/login', AuthController.login);
 router.post('/add-user',upload.single('avatar'), AuthController.addUser)
 router.get('/get-user', AuthController.getUser);
 router.post('/get-one', AuthController.getOne)
-router.post('/update-user/:userId', AuthController.updateUser);
+router.post('/update-user/:userId',upload.single('avatar'), AuthController.updateUser);
 router.post('/post-help/:userId', AuthController.postHelp);
 router.get('/get-help', AuthController.getHelp);
 router.post('/delete-help/:helpId', AuthController.deleteHelp);
+router.post('/delete-user/:userId', AuthController.deleteUser);
 
 
 

@@ -7,6 +7,8 @@ class Home extends Component {
     logout() {
         localStorage.removeItem('token');
         localStorage.removeItem('_id');
+        localStorage.removeItem('userOne');
+
         axios.defaults.headers.common = { 'Authorization': '' };
     }
     render() {

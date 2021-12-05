@@ -114,7 +114,7 @@ const getUser = async (req, res, next) => {
 }
 const updateUser = async (req, res, next) => {
   const userId = req.params.userId;
-  const { name, father, mother, company, street, guarantor, phone } = req.body;
+  const { name, company, street, guarantor, phone } = req.body;
   try {
     const userUpdate = await User.findById(userId);
     if (!userUpdate) {
@@ -125,6 +125,7 @@ const updateUser = async (req, res, next) => {
     userUpdate.street = street;
     userUpdate.phone = phone;
     userUpdate.guarantor = guarantor;
+
     await userUpdate.save();
 
     res.status(201).json({ message: 'News updated!' });
@@ -186,7 +187,19 @@ const deleteHelp = async (req, res, next) => {
   await Help.deleteOne({ _id: helpId })
   res.status(200).json({ message: 'delete fetched.', help });
 }
+const deleteUser = async (req, res, next) => {
+
+  const userId = req.params.userId;
+  const user = await User.findOne({ _id: userId });
+  if (!user) {
+    const error = new Error('Could not find Post.');
+    error.statusCode = 404;
+    throw error;
+  }
+  await User.deleteOne({ _id: userId })
+  res.status(200).json({ message: 'delete fetched.', user });
+}
 
 module.exports = {
-  addUser, getUser, updateUser, postHelp, getHelp, getOne, register,login , deleteHelp
+  addUser, getUser, updateUser, postHelp, getHelp, getOne, register,login , deleteHelp , deleteUser
 }

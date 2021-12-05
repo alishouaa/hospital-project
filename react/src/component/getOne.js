@@ -15,7 +15,6 @@ const GetOne = (props) => {
     var inputPhone = useRef(null)
     var inputStreet = useRef(null)
     var inputGuarantor = useRef(null)
-
     const update = (value1, value4, value5, value6, value7, userId) => {
         const data = {
             "name": value1,
@@ -23,7 +22,6 @@ const GetOne = (props) => {
             "street": value5,
             "phone": value6,
             "guarantor": value7
-
         }
         fetch(`http://localhost:8080/api/update-user/${userId}`
             ,
@@ -50,7 +48,6 @@ const GetOne = (props) => {
 
     const onChangeInput = (userId, event) => {
         event.preventDefault();
-        console.log(user)
         update(inputName.current.value, inputCompany.current.value,
             inputStreet.current.value, inputPhone.current.value, inputGuarantor.current.value, userId);
         toggleState();
@@ -75,7 +72,7 @@ const GetOne = (props) => {
 
                             <div key={index}>
                                 <div className="row">
-                                    <div className="col-md-6">
+                                    <div className="col-md-6 pt-4">
                                         <ul className="info">
                                             <li>الإسم الكامل : <span>{user.name}</span></li>
                                             <li>السكن : <span>{user.company}</span></li>
@@ -121,9 +118,9 @@ const GetOne = (props) => {
                                             </thead>
                                             {props.help.filter((help) => {
                                                 return help.userId.name === user.name
-                                            }).map(help => {
+                                            }).map((help,index) => {
                                                 return (
-                                                    <tbody>
+                                                    <tbody key={index}>
                                                         <tr>
                                                             <td>{help?.userId?.name}</td>
                                                             <td>{help.type}</td>
@@ -149,17 +146,18 @@ const GetOne = (props) => {
                                 <div className="row">
                                     <div className="col-md-6">
                                         <form onSubmit={(event) => onChangeInput(user._id, event)}>
-                                            <input ref={inputName} defaultValue={user.name} type="text" className="form-control my-2" required />
-                                            <input ref={inputCompany} defaultValue={user.company} type="text" className="form-control  my-2" required />
-                                            <input ref={inputStreet} defaultValue={user.street} type="text" className="form-control  my-2" required />
-                                            <input ref={inputGuarantor} defaultValue={user.guarantor} type="text" className="form-control  my-2" required />
-                                            <input ref={inputPhone} defaultValue={user.phone} type="Number" className="form-control  my-2" required />
+                                            <input ref={inputName} defaultValue={user.name} type="text" className="form-control my-2"  />
+                                            <input ref={inputCompany} defaultValue={user.company} type="text" className="form-control  my-2"  />
+                                            <input ref={inputStreet} defaultValue={user.street} type="text" className="form-control  my-2"  />
+                                            <input ref={inputGuarantor} defaultValue={user.guarantor} type="text" className="form-control  my-2"  />
+                                            <input ref={inputPhone} defaultValue={user.phone} type="Number" className="form-control  my-2"  />
 
                                             <button className="btn btn-danger">تعديل</button>
                                         </form>
                                     </div>
                                     <div className="col-md-4">
                                         <img id="img" className="w-100" src={`http://localhost:8080/` + user.avatar} alt="الصورة غير متوفرة على الخادم" />
+
                                     </div>
                                 </div>
 

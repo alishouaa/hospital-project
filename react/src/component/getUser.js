@@ -4,13 +4,15 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 
 class GetUser extends Component {
     state = {
         search: '',
         name: '',
         show: false,
-        users: []
+        users: [],
+        sort : 'asc'
 
     }
     searchHandler = (e) => {
@@ -19,9 +21,11 @@ class GetUser extends Component {
         })
     }
     changeName = (e) => {
-        this.setState({
-            name: e.target.innerText
-        })
+        // this.setState({
+        //     name: e.target.innerText
+        // })
+        localStorage.setItem('userOne', e.target.innerText);
+
     }
     handleClose = () => {
         this.setState({
@@ -33,6 +37,20 @@ class GetUser extends Component {
             show: true
         })
     }
+    deleteUser = async (index, id) => {
+        fetch(`http://localhost:8080/api/delete-user/${id}`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+        let users = this.state.users;
+        users.splice(index, 1);
+        this.setState({
+            users: users
+        })
+    }
     getUsers = () => {
         fetch('http://localhost:8080/api/get-user', {
             method: 'GET'
@@ -40,16 +58,17 @@ class GetUser extends Component {
             .then(res => res.json())
             .then(data => {
                 this.setState({
-                    users: data.result,
+                    users: data.result
                 });
             })
     }
     componentDidMount() {
         this.getUsers();
     }
+ 
 
     render() {
-        let name = this.state.name;
+        
         return (
             <div>
                 <Modal show={this.state.show} onHide={this.handleClose}>
@@ -58,7 +77,7 @@ class GetUser extends Component {
                     </Modal.Header>
                     <Modal.Body id="modal" >
                         <Link
-                            to={{ pathname: "/get-one", state: name }}
+                            to={{ pathname: "/get-one", state: localStorage.getItem('userOne') }}
                             style={{ color: "brown", textDecoration: "none", fontWeight: "bold" }}>
                             الذهاب لصفحة المستخدم
                             <FontAwesomeIcon className="mx-3" icon={faArrowLeft}>
@@ -69,17 +88,27 @@ class GetUser extends Component {
                 <ul className="navbar navbar-search">
                     <li> عدد المستخدمين : {this.state.users.length} </li>
                     <li>
-                        <input className="form-control" type="search" placeholder="ابحث حسب الاسم" value={this.state.search} onChange={this.searchHandler} />
+                        <input className="form-control" type="search" placeholder="ابحث  " value={this.state.search} onChange={this.searchHandler} />
                     </li>
+                    <li><ReactHTMLTableToExcel
+                        id="test-table-xls-button"
+                        className="download-table-xls-button btn btn-success "
+                        table="table-to-xls"
+                        filename="tablexls"
+                        sheet="tablexls"
+                        buttonText="Export Data to Excel Sheet"
+                    /></li>
                     <li>
                         <Link to="/home">
                             <FontAwesomeIcon className="mx-2" icon={faArrowLeft}></FontAwesomeIcon>
                         </Link>
                     </li>
 
+
                 </ul>
                 <div className="table-test">
-                    <table className="table table-bordered ">
+
+                    <table className="table table-bordered" id="table-to-xls">
                         <thead>
                             <tr>
                                 <th scope="col">الإسم الكامل</th>
@@ -111,7 +140,8 @@ class GetUser extends Component {
                                         <td>{user.guarantor}</td>
                                         <td>{user.phone}</td>
                                         <td>{user._id}</td>
-
+                                        <td onClick={() => this.deleteUser(index, user._id)} style={{ backgroundColor: "brown" }} className="btn btn-danger my-1">حذف
+                                        </td>
                                     </tr>
                                 </tbody>
                             )

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+
 class GetHelp extends Component {
     state = {
         helps: []
@@ -41,6 +43,14 @@ class GetHelp extends Component {
                 <ul className="navbar">
                     <li> عدد المساعدات : {this.state.helps.length} </li>
 
+                    <li><ReactHTMLTableToExcel
+                    id="test-table-xls-button"
+                    className="download-table-xls-button btn btn-success "
+                    table="table-to-xls"
+                    filename = "tablexls"
+                    sheet = "tablexls"
+                    buttonText = "Export Data to Excel Sheet"
+                    /></li>
                     <li>
                         <Link to="/home">
                             <FontAwesomeIcon className="mx-2" icon={faArrowLeft}></FontAwesomeIcon>
@@ -49,7 +59,7 @@ class GetHelp extends Component {
 
                 </ul>
                 <div className="table-test">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="table-to-xls">
                         <thead>
                             <tr>
                                 <th scope="col">الإسم الكامل</th>
